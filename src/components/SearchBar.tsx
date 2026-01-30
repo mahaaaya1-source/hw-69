@@ -1,8 +1,8 @@
-import { type ChangeEvent } from 'react';
+import {type ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchShows } from '../store/showsThunks';
-import { selectShows } from '../store/showsSlice';
+import { clearShows, selectShows } from '../store/showsSlice';
 
 const SearchBar = () => {
   const dispatch = useAppDispatch();
@@ -10,6 +10,10 @@ const SearchBar = () => {
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(fetchShows(e.target.value));
+  };
+
+  const onSelect = () => {
+    dispatch(clearShows());
   };
 
   return (
@@ -23,7 +27,11 @@ const SearchBar = () => {
       {shows.length > 0 && (
         <div className="autocomplete">
           {shows.map(show => (
-            <div key={show.id} className="autocomplete-item">
+            <div
+              key={show.id}
+              className="autocomplete-item"
+              onClick={onSelect}
+            >
               <Link to={`/shows/${show.id}`}>{show.name}</Link>
             </div>
           ))}

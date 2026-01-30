@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../api/axiosApi';
-import {type SearchShow, type Show } from '../types';
+import { type SearchShow, type Show } from '../types';
 
 export const fetchShows = createAsyncThunk<Show[], string>(
   'shows/fetch',

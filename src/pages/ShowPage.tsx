@@ -20,11 +20,14 @@ const ShowPage = () => {
 
   return (
     <>
-    
       <SearchBar />
 
       <h2>{show.name}</h2>
-      {show.image && <img src={show.image.medium} />}
+
+      {show.image && (
+        <img src={show.image.medium} alt={show.name} />
+      )}
+
       <div dangerouslySetInnerHTML={{ __html: show.summary }} />
     </>
   );
