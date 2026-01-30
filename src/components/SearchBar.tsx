@@ -1,11 +1,10 @@
-import {type ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchShows } from '../store/showsThunks';
 import { selectShows } from '../store/showsSlice';
-import SearchBar from '../components/SearchBar';
 
-const Home = () => {
+const SearchBar = () => {
   const dispatch = useAppDispatch();
   const shows = useAppSelector(selectShows);
 
@@ -14,9 +13,7 @@ const Home = () => {
   };
 
   return (
-    <>
-      <h1>TV Shows</h1>
-
+    <div style={{ position: 'relative' }}>
       <input
         type="text"
         placeholder="Search for TV Show"
@@ -32,8 +29,8 @@ const Home = () => {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
-export default Home;
+export default SearchBar;

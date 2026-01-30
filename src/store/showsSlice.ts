@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { type Show } from '../types';
+import {type Show } from '../types';
 import { fetchShows, fetchShowById } from './showsThunks';
-import { type RootState } from '../app/store';
+import {type RootState } from '../app/store';
 
 interface ShowsState {
   items: Show[];
@@ -18,7 +18,11 @@ const initialState: ShowsState = {
 const showsSlice = createSlice({
   name: 'shows',
   initialState,
-  reducers: {},
+  reducers: {
+    clearShows: (state) => {
+      state.items = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchShows.pending, (state) => {
@@ -28,12 +32,16 @@ const showsSlice = createSlice({
         state.loading = false;
         state.items = payload;
       })
+      .addCase(fetchShows.rejected, (state) => {
+        state.loading = false;
+      })
       .addCase(fetchShowById.fulfilled, (state, { payload }) => {
         state.selected = payload;
       });
   },
 });
 
+export const { clearShows } = showsSlice.actions;
 export const showsReducer = showsSlice.reducer;
 
 export const selectShows = (state: RootState) => state.shows.items;
