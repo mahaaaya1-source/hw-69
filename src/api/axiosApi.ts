@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosApi = axios.create({
-  baseURL: 'https://api.tvmaze.com/search/shows?q=csi',
+  baseURL: 'https://api.tvmaze.com',
 });
 
 export default axiosApi;
